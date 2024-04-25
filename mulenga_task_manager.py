@@ -11,3 +11,10 @@ def create_database():
     c.execute('''CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY, task_name TEXT, due_date TEXT, status TEXT)''')
     conn.commit()
     conn.close()
+
+# Function that inserts new tasks into database
+def add_task(task_name, due_date):
+    conn = sqlite3.connect('mulenga_tasks.db')
+    c.execute('''INSERT INTO tasks (task_name, due_date, status) VALUES (?, ?, ?)''', (task_name, due_date, 'Pending'))
+    conn.commit()
+    conn.close()
