@@ -70,3 +70,22 @@ def populate_tasks():
 
 populate_tasks()
     
+# Function to view tasks
+def  view_tasks():
+    try:
+        conn = sqlite3.connect('mulenga_tasks.db')
+        c = conn.cursor()
+        c.execute('''SELECT * FROM tasks''')
+        tasks =  c.fetchall()
+        if tasks:
+            print("Tasks in the database:")
+            for task in tasks:
+                print(f"ID: {task[0]}, Task Name: {task[1]}, Due Date: {task[2]}, Status: {task[3]}")
+            else:
+                print("No tasks found in the database.")
+    except sqlite3.Error as e:
+        print(f"Error accessing tasks: {e}")
+    finally:
+        conn.close()
+
+view_tasks()
